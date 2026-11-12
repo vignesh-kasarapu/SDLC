@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NFR / security / performance review",
+  "type": "object",
+  "required": ["scope", "findings", "verdict"],
+  "properties": {
+    "scope": {"type": "string"},
+    "findings": {"type": "array", "items": {"type": "object",
+      "required": ["id", "severity", "category", "description", "evidence", "recommendation"],
+      "properties": {
+        "id": {"type": "string"},
+        "severity": {"enum": ["critical", "high", "medium", "low", "info"]},
+        "category": {"type": "string"},
+        "file": {"type": "string"},
+        "line": {"type": "integer"},
+        "requirement_id": {"type": "string"},
+        "description": {"type": "string"},
+        "evidence": {"type": "string"},
+        "recommendation": {"type": "string"}}}},
+    "verdict": {"enum": ["pass", "fail"], "description": "fail if and only if any critical or high finding exists"}
+  }
+}

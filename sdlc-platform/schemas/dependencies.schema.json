@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed feature dependencies (validated by tools/dag.py)",
+  "type": "object",
+  "required": ["edges"],
+  "properties": {
+    "edges": {"type": "array", "items": {"type": "object", "required": ["from", "to", "type", "reason"],
+      "properties": {
+        "from": {"type": "string", "pattern": "^F-\\d{3}$", "description": "prerequisite feature"},
+        "to": {"type": "string", "pattern": "^F-\\d{3}$", "description": "dependent feature"},
+        "type": {"enum": ["hard", "soft"]},
+        "kind": {"enum": ["data", "api", "auth", "ui", "business_rule", "shared_component"]},
+        "reason": {"type": "string"}}}}
+  }
+}

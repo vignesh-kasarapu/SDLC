@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Defect report",
+  "type": "object",
+  "required": ["id", "feature", "severity", "title", "expected", "actual", "evidence", "status"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^D-\\d{3}$"},
+    "feature": {"type": "string"},
+    "severity": {"enum": ["critical", "high", "medium", "low"]},
+    "title": {"type": "string"},
+    "steps": {"type": "array", "items": {"type": "string"}},
+    "expected": {"type": "string"},
+    "actual": {"type": "string"},
+    "evidence": {"type": "string", "description": "Failing test name plus trimmed output"},
+    "files": {"type": "array", "items": {"type": "string"}},
+    "owner": {"enum": ["database-dev", "backend-dev", "api-dev", "frontend-dev", "integrator", "human"]},
+    "status": {"enum": ["open", "fixed", "verified", "wont_fix"]}
+  }
+}

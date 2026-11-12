@@ -1,0 +1,47 @@
+# Model routing for every subagent: the single source of truth.
+# `primary` is the intended model. `fallback` is used when the subscription cannot run the
+# primary model, or when you want to save usage on Claude Pro.
+# Apply with:   python tools/models.py apply primary|fallback
+#               python tools/models.py set <agent> <opus|sonnet|haiku>
+#
+# Rationale:
+#   opus   -> judgment-heavy, low-volume, high cost-of-error (critique, architecture, security)
+#   sonnet -> high-volume generation and all code writing
+#   haiku  -> mechanical transformation, routing, summarising numbers, docs assembly
+agents:
+  # Phase 1: Requirements Intelligence & FRD
+  doc-normalizer:         {primary: haiku,  fallback: haiku}
+  visual-analyst:         {primary: sonnet, fallback: sonnet}   # Claude vision: wireframes, diagrams, scans
+  domain-identifier:      {primary: sonnet, fallback: haiku}
+  business-context:       {primary: sonnet, fallback: sonnet}
+  requirements-extractor: {primary: sonnet, fallback: sonnet}
+  feature-advisor:        {primary: sonnet, fallback: sonnet}
+  frd-writer:             {primary: sonnet, fallback: sonnet}
+  frd-evaluator:          {primary: opus,   fallback: sonnet}
+  # After FRD approval: screens are settled before specs
+  wireframe-designer:     {primary: sonnet, fallback: sonnet}
+  # Phase 2: Technical Specification & Planning
+  architect:              {primary: opus,   fallback: sonnet}
+  feature-breakdown:      {primary: sonnet, fallback: sonnet}
+  db-spec:                {primary: sonnet, fallback: sonnet}
+  api-spec:               {primary: sonnet, fallback: sonnet}
+  ui-spec:                {primary: sonnet, fallback: sonnet}
+  dependency-analyst:     {primary: sonnet, fallback: sonnet}
+  feature-spec-writer:    {primary: sonnet, fallback: sonnet}
+  # Phase 3: Multi-Agent Development
+  sme:                    {primary: sonnet, fallback: sonnet}
+  database-dev:           {primary: sonnet, fallback: sonnet}
+  backend-dev:            {primary: sonnet, fallback: sonnet}
+  api-dev:                {primary: sonnet, fallback: sonnet}
+  frontend-dev:           {primary: sonnet, fallback: sonnet}
+  nfr-reviewer:           {primary: opus,   fallback: sonnet}
+  integrator:             {primary: sonnet, fallback: sonnet}
+  tester:                 {primary: sonnet, fallback: sonnet}
+  fix-triager:            {primary: haiku,  fallback: haiku}
+  # Phase 4: Integration, QA & Delivery
+  system-tester:          {primary: sonnet, fallback: sonnet}
+  security-auditor:       {primary: opus,   fallback: sonnet}
+  perf-tester:            {primary: haiku,  fallback: haiku}
+  traceability-auditor:   {primary: haiku,  fallback: haiku}
+  doc-writer:             {primary: haiku,  fallback: haiku}
+  deployer:               {primary: sonnet, fallback: sonnet}

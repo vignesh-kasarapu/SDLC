@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Technology stack decision (captured from the user in Phase 1, binding for Phase 2+)",
+  "type": "object",
+  "required": ["source", "confirmed_by", "confirmed_at", "frontend", "backend", "database", "architecture_pattern", "coding_standards"],
+  "properties": {
+    "source": {"enum": ["user", "crd_confirmed_by_user"], "description": "Stack chosen by the user, or stated in the CRD and confirmed by the user"},
+    "crd_sources": {"type": "array", "items": {"type": "string", "pattern": "^C-\\d{3,}$"}, "description": "CRD blocks that mention technology constraints"},
+    "confirmed_by": {"type": "string", "minLength": 1},
+    "confirmed_at": {"type": "string"},
+    "frontend": {"$ref": "#/$defs/component"},
+    "backend": {"$ref": "#/$defs/component"},
+    "database": {"type": "object", "required": ["engine"], "properties": {
+      "engine": {"type": "string"}, "version": {"type": "string"}, "orm": {"type": "string"}, "migrations": {"type": "string"}}},
+    "testing": {"type": "object", "properties": {
+      "backend": {"type": "string"}, "frontend": {"type": "string"}, "e2e": {"type": "string"}}},
+    "deployment": {"type": "string", "description": "e.g. Docker + docker-compose, Azure App Service, on-prem IIS"},
+    "authentication": {"type": "string", "description": "e.g. JWT, OAuth2/OIDC with company SSO"},
+    "architecture_pattern": {"enum": ["MVC", "MVT", "framework-native", "existing"],
+      "description": "MVC (default): Model-View-Controller with Service and Repository layers, enforced by layer_check. MVT: Django's Model-View-Template. framework-native: the framework's own convention (e.g. Next.js app router, Rails). existing: whatever the imported application already uses. Anything other than MVC needs pattern_rationale."},
+    "pattern_rationale": {"type": "string", "minLength": 10, "description": "Why the pattern is not MVC, and which folder convention the architect must define"},
+    "forbidden": {"type": "array", "items": {"type": "string"}, "description": "Technologies the specs must not propose (spec rule SV04), e.g. [\"jQuery\", \"Tailwind\"]"},
+    "allowed_mentions": {"type": "array", "items": {"type": "string"}, "description": "Catalog technologies the specs may mention despite not being in the stack (e.g. an external system)"},
+    "coding_standards": {"type": "array", "minItems": 1, "items": {"type": "string"},
+      "description": "Standards that apply, e.g. 'PEP 8 + ruff', 'ESLint airbnb + Prettier', 'knowledge/standards/mvc-coding-standards.md'"},
+    "constraints": {"type": "array", "items": {"type": "string"}, "description": "Hosting, licensing, browser support, existing systems"},
+    "notes": {"type": "string"}
+  },
+  "allOf": [{"if": {"properties": {"architecture_pattern": {"not": {"const": "MVC"}}}},
+             "then": {"required": ["pattern_rationale"]}}],
+  "$defs": {
+    "component": {"type": "object", "required": ["language", "framework"], "properties": {
+      "language": {"type": "string"}, "framework": {"type": "string"}, "version": {"type": "string"},
+      "libraries": {"type": "array", "items": {"type": "string"}}}}
+  }
+}

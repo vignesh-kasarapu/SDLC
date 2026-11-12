@@ -1,0 +1,129 @@
+# Recruitment / Applicant Tracking System checklist (illustrative, not a legal standard).
+# Same matching rules as _generic/checklist.yaml: a requirement covers an item when it lists the
+# item id in checklist_refs AND its text matches a keyword from EVERY group in `match`.
+# Data-protection and anti-discrimination rules vary by country; capture them as the client
+# states them and flag them for legal review. The evaluator must not invent them.
+domain: recruitment
+items:
+  - id: RCT-REQUISITION
+    category: Requisition
+    level: mandatory
+    description: Hiring managers raise job requisitions (role, department, headcount, budget/CTC range, justification).
+    match: [[requisition, hiring request, job request, headcount request, position request]]
+
+  - id: RCT-REQ-APPROVAL
+    category: Requisition
+    level: mandatory
+    description: Requisitions go through a defined approval workflow before a job opening is published.
+    match: [[requisition, opening, position], [approv, reject]]
+
+  - id: RCT-JOB-POSTING
+    category: Sourcing
+    level: mandatory
+    description: Approved openings become job postings (description, location, experience, skills) on a careers page or job boards.
+    match: [[job posting, job post, publish, careers page, job board, job opening, opening]]
+
+  - id: RCT-APPLY
+    category: Candidate intake
+    level: mandatory
+    description: Candidates can apply or be added (profile, resume upload, source of application).
+    match: [[candidate, applicant], [apply, application, resume, CV, upload, add]]
+
+  - id: RCT-DUPLICATE
+    category: Candidate intake
+    level: recommended
+    description: Duplicate candidate detection (same email/phone) and merging.
+    match: [[duplicate, merge, already exists, unique]]
+
+  - id: RCT-PIPELINE
+    category: Hiring pipeline
+    level: mandatory
+    description: Candidates move through configurable pipeline stages with status history.
+    match: [[stage, pipeline, status], [move, transition, history, configur, advance]]
+
+  - id: RCT-SCREENING
+    category: Hiring pipeline
+    level: recommended
+    description: Screening (shortlist/reject) with reasons, optionally screening questions or resume parsing.
+    match: [[screen, shortlist], [reject, reason, question, pars]]
+
+  - id: RCT-INTERVIEW
+    category: Interviews
+    level: mandatory
+    description: Interviews are scheduled with interviewers, date/time, mode (in person/video) and calendar invites.
+    match: [[interview], [schedul, slot, calendar, invite, date, time]]
+
+  - id: RCT-FEEDBACK
+    category: Interviews
+    level: mandatory
+    description: Interviewers submit structured feedback/scorecards with a recommendation.
+    match: [[feedback, scorecard, evaluation, rating], [interview, interviewer]]
+
+  - id: RCT-OFFER
+    category: Offers
+    level: mandatory
+    description: Offers are created, approved, sent and tracked (accepted/declined/withdrawn).
+    match: [[offer], [approv, accept, declin, send, letter, status]]
+
+  - id: RCT-OFFER-APPROVAL
+    category: Offers
+    level: recommended
+    description: Offers outside the budget/CTC band require additional approval.
+    match: [[offer], [approv], [budget, band, CTC, salary, compensation, range]]
+
+  - id: RCT-ONBOARD-HANDOFF
+    category: Offers
+    level: recommended
+    description: Accepted offers hand over to onboarding / HR records (joining date, employee creation).
+    match: [[join, onboard, employee record, hand over, handover, HRMS]]
+
+  - id: RCT-COMMS
+    category: Communication
+    level: recommended
+    description: Candidate communication (acknowledgement, interview invites, rejection, offer) via email templates.
+    match: [[email, notif, communicat, template, message], [candidate, applicant]]
+
+  - id: RCT-ROLES
+    category: Access control
+    level: mandatory
+    description: Role-based access for recruiter, hiring manager, interviewer, HR/admin (interviewers see only assigned candidates).
+    match: [[recruiter, hiring manager, interviewer], [role, permission, access, only see, restrict]]
+
+  - id: RCT-CANDIDATE-DATA
+    category: Privacy
+    level: mandatory
+    description: Candidate personal data has consent, retention/deletion rules and restricted access.
+    match: [[candidate, applicant, personal data], [consent, retention, delet, privacy, purge, restrict, GDPR, DPDP]]
+
+  - id: RCT-REFERRAL
+    category: Sourcing
+    level: conditional
+    applies_if: [referral, refer]
+    description: Employee referrals are captured with referrer, status visibility and any referral bonus rules.
+    match: [[referral, refer]]
+
+  - id: RCT-AGENCY
+    category: Sourcing
+    level: conditional
+    applies_if: [agency, vendor, consultant, third-party recruiter]
+    description: Agency/vendor submissions are attributed, with ownership/duplicate rules.
+    match: [[agency, vendor, consultant]]
+
+  - id: RCT-ANALYTICS
+    category: Reporting
+    level: recommended
+    description: Hiring metrics - time-to-hire, funnel conversion, source effectiveness, open positions.
+    match: [[report, dashboard, metric, analytics], [time to hire, time-to-hire, funnel, conversion, source, pipeline, opening]]
+
+  - id: RCT-AUDIT
+    category: Compliance
+    level: recommended
+    description: Audit trail of stage changes, feedback edits and offer changes.
+    match: [[audit, history, trail, log]]
+
+  - id: RCT-FAIRNESS
+    category: Compliance
+    level: conditional
+    applies_if: [diversity, equal opportunity, EEO, discrimination, bias, compliance]
+    description: Equal-opportunity / anti-bias requirements are captured AS STATED BY THE CLIENT and flagged for legal review.
+    match: [[diversity, equal opportunity, EEO, discrimination, bias, fair]]

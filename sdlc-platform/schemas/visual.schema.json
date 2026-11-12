@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vision analysis of one image block (wireframe, screenshot, diagram or scanned page): 01-frd/visuals/C-nnn.json",
+  "type": "object",
+  "required": ["id", "source", "kind", "summary"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^C-\\d{3,}$"},
+    "source": {"type": "string", "description": "Image path (or PDF path) as listed in crd-index.json"},
+    "page": {"type": "integer", "minimum": 1},
+    "kind": {"enum": ["ui_screen", "diagram", "text_page", "table_image", "other"]},
+    "summary": {"type": "string", "minLength": 10, "description": "One or two factual sentences: what the image shows"},
+    "text": {"type": "string", "description": "Verbatim transcription of visible text (required for text_page and table_image)"},
+    "screen": {"type": "object", "properties": {
+      "screen_name": {"type": "string"},
+      "user_role": {"type": "string"},
+      "layout": {"type": "string"},
+      "navigation": {"type": "array", "items": {"type": "string"}},
+      "form_fields": {"type": "array", "items": {"type": "object", "required": ["label"], "properties": {
+        "label": {"type": "string"}, "type": {"type": "string"}, "required": {"type": "boolean"},
+        "options": {"type": "array", "items": {"type": "string"}}}}},
+      "buttons": {"type": "array", "items": {"type": "object", "required": ["label"], "properties": {
+        "label": {"type": "string"}, "action": {"type": "string"}}}},
+      "tables": {"type": "array", "items": {"type": "object", "properties": {
+        "caption": {"type": "string"}, "columns": {"type": "array", "items": {"type": "string"}}}}},
+      "annotations": {"type": "array", "items": {"type": "string"}},
+      "other_elements": {"type": "array", "items": {"type": "string"}}}},
+    "mermaid": {"type": "string", "description": "For diagrams: the diagram as Mermaid code"},
+    "uncertain": {"type": "array", "items": {"type": "string"}, "description": "Parts that could not be read; never guess them"}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"enum": ["text_page", "table_image"]}}}, "then": {"required": ["text"]}},
+    {"if": {"properties": {"kind": {"const": "ui_screen"}}}, "then": {"required": ["screen"]}}
+  ]
+}

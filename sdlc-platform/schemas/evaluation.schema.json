@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FRD evaluation (roadmap section 2.5)",
+  "type": "object",
+  "required": ["frd_version", "dimensions", "issues", "verdict", "summary"],
+  "properties": {
+    "frd_version": {"type": "integer", "minimum": 1},
+    "dimensions": {
+      "type": "object",
+      "required": ["completeness", "clarity", "consistency", "testability", "traceability", "domain_coverage", "feasibility", "nfr_coverage"],
+      "additionalProperties": {"type": "object", "required": ["score", "rationale"], "properties": {
+        "score": {"type": "integer", "minimum": 1, "maximum": 5},
+        "rationale": {"type": "string"}}}
+    },
+    "issues": {"type": "array", "items": {"type": "object",
+      "required": ["id", "severity", "dimension", "description", "evidence", "suggested_fix"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^E-\\d{3}$"},
+        "severity": {"enum": ["blocker", "major", "minor"]},
+        "dimension": {"type": "string"},
+        "requirement_ids": {"type": "array", "items": {"type": "string"}},
+        "description": {"type": "string"},
+        "evidence": {"type": "string", "description": "Quote or ID reference proving the issue"},
+        "suggested_fix": {"type": "string"}}}},
+    "verdict": {"enum": ["pass", "fail"], "description": "fail if any blocker, or any dimension score below 3"},
+    "summary": {"type": "string"}
+  }
+}

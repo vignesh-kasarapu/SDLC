@@ -1,0 +1,20 @@
+# Technology catalog for the "forbidden technology" spec check (tools/spec_docs.py, SV04).
+# In every category where the user's stack (01-frd/tech-stack.json) names a technology, the OTHER
+# technologies of that category are forbidden in the specs, unless:
+#   - the line negates or compares them ("not", "instead of", "rather than", "over", "vs", "rejected"), or
+#   - they are listed in tech-stack.json `allowed_mentions`, or in `always_allowed` below.
+# tech-stack.json `forbidden` adds explicit bans (e.g. ["Tailwind", "jQuery"]) that apply everywhere.
+categories:
+  backend_framework: [FastAPI, Django, Flask, Spring Boot, Express, NestJS, Laravel, Ruby on Rails, ASP.NET Core, Gin, Symfony, Koa]
+  frontend_framework: [React, Angular, Vue, Svelte, Next.js, Nuxt, Blazor, Ember, jQuery]
+  database: [PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB, DynamoDB, Cassandra, CouchDB]
+  orm: [SQLAlchemy, Django ORM, Hibernate, Entity Framework, EF Core, TypeORM, Prisma, Sequelize, Eloquent, Mongoose]
+  backend_test: [pytest, JUnit, xUnit, NUnit, Jest, Mocha, PHPUnit, RSpec]
+  e2e_test: [Playwright, Cypress, Selenium, Puppeteer]
+always_allowed: [SQLite, H2]   # in-memory test databases
+aliases:                       # alternative spellings that count as the same technology
+  PostgreSQL: [Postgres]
+  SQL Server: [MSSQL]
+  Vue: [Vue.js]
+  React: [React.js]
+  Express: [Express.js]

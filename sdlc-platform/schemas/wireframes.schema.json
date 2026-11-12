@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wireframe set (01b-wireframes/vN/screens.json): one low-fidelity HTML screen per entry",
+  "type": "object",
+  "required": ["version", "screens", "no_ui_requirements"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1},
+    "based_on": {"type": "array", "items": {"type": "string"},
+      "description": "Inputs used: approved FRD version, client sketches, reviewer feedback"},
+    "screens": {"type": "array", "minItems": 1, "items": {"type": "object",
+      "required": ["id", "name", "file", "roles", "requirement_ids", "purpose"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^W-\\d{3}$"},
+        "name": {"type": "string", "minLength": 3, "description": "Screen name; Phase 2 features and ui-spec use it verbatim"},
+        "file": {"type": "string", "pattern": "^W-\\d{3}[\\w.-]*\\.html$"},
+        "roles": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "requirement_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^(FR|NFR|BR|DR|IR|SR)-\\d{3}$"}},
+        "purpose": {"type": "string"},
+        "navigates_to": {"type": "array", "items": {"type": "string", "pattern": "^W-\\d{3}$"}},
+        "states": {"type": "array", "items": {"enum": ["default", "loading", "empty", "error", "success"]}},
+        "open_questions": {"type": "array", "items": {"type": "string"}}}}},
+    "no_ui_requirements": {"type": "array", "items": {"type": "object", "required": ["id", "reason"],
+      "properties": {"id": {"type": "string"}, "reason": {"type": "string"}}},
+      "description": "Functional requirements that deliberately have no screen (batch jobs, integrations, emails)"}
+  }
+}

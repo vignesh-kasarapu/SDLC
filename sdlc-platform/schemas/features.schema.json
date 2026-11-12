@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feature breakdown",
+  "type": "object",
+  "required": ["features"],
+  "properties": {
+    "features": {"type": "array", "minItems": 1, "items": {"type": "object",
+      "required": ["id", "title", "description", "requirement_ids", "layers"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^F-\\d{3}$"},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "requirement_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "layers": {"type": "array", "minItems": 1, "items": {"enum": ["database", "backend", "api", "frontend"]}},
+        "entities": {"type": "array", "items": {"type": "string"}},
+        "endpoints": {"type": "array", "items": {"type": "string"}},
+        "screens": {"type": "array", "items": {"type": "string"}}}}}
+  }
+}

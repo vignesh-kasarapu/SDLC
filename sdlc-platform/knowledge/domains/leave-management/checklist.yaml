@@ -1,0 +1,103 @@
+# Leave Management System domain checklist (illustrative, not a legal/regulatory standard).
+# Same matching rules as _generic/checklist.yaml. Statutory leave rules vary by country
+# and must be confirmed with the client — the evaluator must NOT invent them.
+domain: leave-management
+items:
+  - id: LMS-EMP
+    category: Employee management
+    level: mandatory
+    description: Employee records (identity, department, manager, joining date, employment type) exist or are sourced from an HR system.
+    match: [[employee], [department, manager, join, profile, record, master]]
+
+  - id: LMS-LEAVE-TYPES
+    category: Leave policy
+    level: mandatory
+    description: Leave types are configurable (e.g. annual, sick, casual, unpaid) with per-type rules.
+    match: [[leave type, type of leave, leave category, leave types, categories of leave]]
+
+  - id: LMS-APPLY
+    category: Leave application
+    level: mandatory
+    description: Employees can apply for leave with type, date range, (half-)day selection and reason.
+    match: [[apply, application, request, submit], [date, period, from, range]]
+
+  - id: LMS-APPROVAL
+    category: Approval workflow
+    level: mandatory
+    description: Approval workflow defines approver(s), approve/reject with comments, and escalation or delegation.
+    match: [[approv, reject], [manager, approver, supervisor, HR]]
+
+  - id: LMS-BALANCE
+    category: Leave balance
+    level: mandatory
+    description: Leave balances are tracked per employee and type, and updated on approval/cancellation.
+    match: [[balance, entitlement, quota, remaining]]
+
+  - id: LMS-ACCRUAL
+    category: Leave policy
+    level: recommended
+    description: Accrual rules (monthly/annual credit, pro-rating for new joiners) are defined.
+    match: [[accru, credit, pro-rat, prorat, allocat]]
+
+  - id: LMS-CARRY
+    category: Leave policy
+    level: recommended
+    description: Year-end carry-forward, lapse and/or encashment rules are defined.
+    match: [[carry, lapse, encash, year-end, year end, expire]]
+
+  - id: LMS-CANCEL
+    category: Leave application
+    level: mandatory
+    description: Employees can cancel or modify pending (and policy-permitted approved) requests; balances are restored.
+    match: [[cancel, withdraw, modif]]
+
+  - id: LMS-OVERLAP
+    category: Business rules
+    level: mandatory
+    description: Validation prevents overlapping requests and requests exceeding available balance (or defines negative-balance policy).
+    match: [[overlap, duplicate, exceed, insufficient, negative balance, available balance]]
+
+  - id: LMS-HOLIDAY
+    category: Calendar
+    level: recommended
+    description: Public holidays and weekends are excluded from leave-day calculation via a holiday calendar.
+    match: [[holiday, weekend, working day, non-working]]
+
+  - id: LMS-TEAM-CAL
+    category: Visibility
+    level: recommended
+    description: Managers can see a team leave calendar / who is on leave.
+    match: [[calendar, team view, who is on leave, team leave, absence view]]
+
+  - id: LMS-HR-ADMIN
+    category: Administration
+    level: mandatory
+    description: HR/admin can configure policies, leave types and adjust balances with audit.
+    match: [[HR, admin], [configur, adjust, manage, setup, set up, policy]]
+
+  - id: LMS-REPORTS
+    category: Reporting
+    level: recommended
+    description: Leave reports (utilisation, balances, absenteeism) for HR and managers.
+    match: [[report, export, dashboard]]
+
+  - id: LMS-ATTACH
+    category: Leave application
+    level: conditional
+    applies_if: [sick, medical, certificate, document, attachment]
+    description: Supporting documents (e.g. medical certificate) can be attached when a leave type requires them.
+    match: [[attach, upload, certificate, document]]
+
+  - id: LMS-PAYROLL
+    category: Integrations
+    level: conditional
+    applies_if: [payroll, salary, loss of pay, LOP, unpaid]
+    description: Unpaid / loss-of-pay leave is communicated to payroll.
+    match: [[payroll, salary, loss of pay, LOP]]
+
+  - id: LMS-STATUTORY
+    category: Compliance
+    level: conditional
+    applies_if: [maternity, paternity, statutory, labour law, labor law, compliance, regulation]
+    description: Statutory leave entitlements are captured AS STATED BY THE CLIENT and flagged for legal review.
+    match: [[maternity, paternity, statutory, law, regulat, compliance]]

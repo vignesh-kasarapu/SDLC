@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feature recommendations (Phase 1, before FRD evaluation)",
+  "type": "object",
+  "required": ["domain", "based_on", "covered", "recommended"],
+  "properties": {
+    "domain": {"type": "string"},
+    "based_on": {"type": "array", "items": {"type": "string"},
+      "description": "Inputs used, e.g. requirements.json, knowledge/domains/<d>/checklist.yaml, domain knowledge"},
+    "covered": {"type": "array", "description": "Capabilities the CRD already asks for",
+      "items": {"type": "object", "required": ["capability", "requirement_ids"], "properties": {
+        "capability": {"type": "string"},
+        "requirement_ids": {"type": "array", "items": {"type": "string"}},
+        "checklist_refs": {"type": "array", "items": {"type": "string"}}}}},
+    "recommended": {"type": "array", "description": "Capabilities the CRD does not ask for but this domain usually needs",
+      "items": {"type": "object",
+        "required": ["id", "title", "description", "importance", "rationale", "basis", "decision"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^SUG-\\d{3}$"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "importance": {"enum": ["essential", "recommended", "optional"],
+            "description": "essential = most systems in this domain cannot operate without it (usually a mandatory checklist item)"},
+          "rationale": {"type": "string"},
+          "basis": {"enum": ["domain_checklist", "domain_knowledge"],
+            "description": "domain_checklist = backed by a checklist item; domain_knowledge = AI judgement, weaker"},
+          "checklist_refs": {"type": "array", "items": {"type": "string"}},
+          "related_requirements": {"type": "array", "items": {"type": "string"}},
+          "suggested_priority": {"enum": ["must", "should", "could"]},
+          "decision": {"enum": ["pending", "accepted", "rejected", "ask_client"],
+            "description": "Set by the user in /recommend-features. accepted -> requirements with source SUG-nnn; ask_client -> open question"},
+          "decided_by": {"type": "string"},
+          "note": {"type": "string"}}}}
+  }
+}

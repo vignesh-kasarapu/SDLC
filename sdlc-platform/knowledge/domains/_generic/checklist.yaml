@@ -1,0 +1,69 @@
+# Cross-domain checklist applied to every project (roadmap §2.3).
+# level: mandatory | recommended | conditional
+# A requirement "covers" an item when it lists the item id in `checklist_refs`
+# AND its title/statement/acceptance text matches at least one keyword from EVERY
+# group in `match` (evidence check — tagging alone is not enough).
+# Conditional items apply only when one of `applies_if` appears in the CRD text.
+items:
+  - id: GEN-AUTH
+    category: Access control
+    level: mandatory
+    description: Users must authenticate before accessing protected functions.
+    match: [[login, authenticat, sign in, sign-in, SSO, credential]]
+
+  - id: GEN-RBAC
+    category: Access control
+    level: mandatory
+    description: Role-based authorization defines which roles may perform which actions.
+    match: [[role, permission, authoriz, access control]]
+
+  - id: GEN-AUDIT
+    category: Access control
+    level: recommended
+    description: Security-relevant and business-critical actions are recorded in an audit trail.
+    match: [[audit, history, activity log, trail]]
+
+  - id: GEN-VALIDATION
+    category: Data quality
+    level: mandatory
+    description: Input validation rules and error feedback are defined.
+    match: [[validat, invalid, error message, reject]]
+
+  - id: GEN-NFR-PERF
+    category: Non-functional
+    level: recommended
+    description: Performance expectations (response time, concurrent users) are stated.
+    match: [[response time, latency, second, concurrent, performance, load]]
+
+  - id: GEN-NFR-AVAIL
+    category: Non-functional
+    level: recommended
+    description: Availability / reliability / backup expectations are stated.
+    match: [[availab, uptime, backup, recover, reliab]]
+
+  - id: GEN-PRIVACY
+    category: Privacy and security
+    level: mandatory
+    description: Personal data access, protection and retention are addressed.
+    match: [[personal data, privacy, encrypt, retention, sensitive, PII, confidential]]
+
+  - id: GEN-NOTIFY
+    category: Communication
+    level: conditional
+    applies_if: [notify, notification, email, alert, SMS]
+    description: Notification triggers, channels and recipients are defined.
+    match: [[notif, email, alert, SMS], [when, upon, trigger, after]]
+
+  - id: GEN-INTEGRATION
+    category: Integrations
+    level: conditional
+    applies_if: [integrat, API, third-party, third party, sync, import, export, payroll, ERP, LDAP, Active Directory]
+    description: External integrations specify the system, direction and data exchanged.
+    match: [[integrat, API, sync, import, export, interface]]
+
+  - id: GEN-REPORTING
+    category: Reporting
+    level: conditional
+    applies_if: [report, dashboard, analytics, export]
+    description: Reports specify audience, data, filters and format.
+    match: [[report, dashboard, export]]

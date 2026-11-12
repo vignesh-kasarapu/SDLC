@@ -1,0 +1,68 @@
+# File ownership for Phase 3 specialist agents (roadmap §4.4: no two agents edit the same files).
+# This is the DEFAULT for the default stack (FastAPI + React), using the MVC layout from
+# knowledge/standards/mvc-coding-standards.md. For any other stack, the architect writes
+# 02-spec/ownership.yaml in the same format, and that file takes precedence.
+# Paths are relative to app-development/<id>/ (the app repository) and use fnmatch-style globs.
+owners:
+  database-dev:            # Model layer
+    - backend/app/models/*
+    - backend/app/models/**
+    - backend/migrations/**
+    - backend/alembic.ini
+    - backend/tests/unit/test_models*.py
+  backend-dev:             # Service + Repository layers
+    - backend/app/services/**
+    - backend/app/repositories/**
+    - backend/tests/unit/**
+  api-dev:                 # Controller layer + DTOs
+    - backend/app/controllers/**
+    - backend/app/schemas/**
+  frontend-dev:            # Views, components, frontend controllers/services
+    - frontend/src/views/**
+    - frontend/src/components/**
+    - frontend/src/controllers/**
+    - frontend/src/services/**
+    - frontend/src/types/**
+    - frontend/src/utils/**
+    - frontend/public/**
+    - frontend/index.html
+  tester:
+    - backend/tests/**
+    - frontend/src/**/*.test.ts
+    - frontend/src/**/*.test.tsx
+    - e2e/**
+    - perf/**
+  integrator:
+    - backend/app/main.py
+    - backend/app/core/**
+    - backend/app/__init__.py
+    - backend/app/*/__init__.py
+    - backend/requirements*.txt
+    - backend/pyproject.toml
+    - backend/ruff.toml
+    - backend/mypy.ini
+    - backend/.env.example
+    - frontend/package.json
+    - frontend/package-lock.json
+    - frontend/vite.config.ts
+    - frontend/tsconfig*.json
+    - frontend/eslint.config.js
+    - frontend/.prettierrc
+    - frontend/src/main.tsx
+    - frontend/src/App.tsx
+    - frontend/src/api/client.ts
+    - docker-compose*.yml
+    - README.md
+    - .gitignore
+  deployer:
+    - Dockerfile*
+    - backend/Dockerfile
+    - frontend/Dockerfile
+    - docker-compose*.yml
+    - .github/**
+    - deploy/**
+    - .env.example
+  doc-writer:
+    - docs/**
+    - README.md
+    - CHANGELOG.md

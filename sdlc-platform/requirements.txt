@@ -1,0 +1,10 @@
+# Required
+pyyaml>=6.0,<7
+jsonschema>=4.18,<5
+pypdf>=4.0,<7          # PDF text
+pytest>=8.0,<10        # platform tool tests
+
+# Optional (install for better PDF input)
+#   pdfplumber>=0.11,<0.12   extracts PDF tables as real tables
+#   pytesseract>=0.3,<0.4    OCR for scanned PDF pages (also needs the Tesseract program);
+#                            without it, scanned pages go to the visual-analyst agent (Claude vision)

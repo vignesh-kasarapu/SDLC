@@ -1,0 +1,42 @@
+# Workspace root (SDLC/). If you version this folder, only the shareable platform is committed.
+#   sdlc-platform/     the platform            -> committed
+#   projects/          client data             -> NEVER committed (confidential)
+#   app-development/   generated app repos     -> NEVER committed here (each is its own git repo)
+
+# Client project data: CRDs, FRDs, specs, build logs, client documents
+projects/*
+!projects/.gitkeep
+
+# Generated applications (each has its own repository; share them separately)
+app-development/*
+!app-development/.gitkeep
+
+# Temporary hook shim from the move into sdlc-platform/ (delete the folder once Claude Code runs there)
+/tools/
+
+# Packaged zips (python sdlc-platform/tools/package.py writes them here)
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local Claude Code settings (per user)
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/

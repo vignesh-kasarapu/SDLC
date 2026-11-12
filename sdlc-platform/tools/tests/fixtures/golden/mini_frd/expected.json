@@ -1,0 +1,11 @@
+{
+  "doc_type": "frd",
+  "kinds": ["heading", "heading", "para", "heading", "list", "list", "list", "list", "heading", "table", "heading", "para"],
+  "texts": {
+    "C-001": "# Functional Requirements Document: Team Leave Tracker",
+    "C-005": "- REQ-001 The system shall let an employee submit a leave request for a date range.",
+    "C-008": "- REQ-004 An employee may have at most 25 days of annual leave per calendar year.",
+    "C-010": "| ID | Requirement |\n|---|---|\n| NFR-001 | Pages load within 2 seconds for 50 concurrent users. |\n| NFR-002 | All traffic uses HTTPS. |",
+    "C-012": "Payroll processing is out of scope."
+  }
+}

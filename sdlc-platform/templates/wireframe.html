@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Low-fidelity wireframe template (wireframe-designer). Self-contained: no external scripts,
+     stylesheets, fonts or images. Grey boxes, real labels, requirement IDs as annotations. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>W-nnn: Screen name</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; color: #222; background: #fafafa; }
+  header { display: flex; gap: 16px; align-items: center; padding: 10px 16px; background: #ddd; border-bottom: 2px solid #999; }
+  header .logo { font-weight: bold; } nav a { margin-right: 12px; color: #222; }
+  main { max-width: 960px; margin: 16px auto; padding: 0 16px; }
+  .box { border: 2px dashed #999; padding: 12px; margin: 12px 0; background: #fff; }
+  .placeholder { background: #e5e5e5; border: 1px solid #aaa; text-align: center; padding: 24px; color: #666; }
+  label { display: block; margin-top: 8px; font-weight: 600; } input, select, textarea { width: 100%; padding: 6px; border: 1px solid #888; }
+  .req::after { content: " *"; color: #a00; }
+  button { padding: 6px 14px; margin: 12px 8px 0 0; border: 1px solid #555; background: #eee; }
+  button.primary { background: #555; color: #fff; }
+  table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #aaa; padding: 6px; text-align: left; }
+  .note { font-size: 12px; color: #555; background: #ffffe0; border-left: 4px solid #cc0; padding: 4px 8px; margin: 6px 0; }
+  .state { border: 1px solid #bbb; padding: 8px; margin: 6px 0; color: #555; }
+</style>
+</head>
+<body data-screen="W-nnn">
+<header><span class="logo">App name</span>
+  <nav><a href="index.html">All screens</a><a href="W-002-example.html">Next screen</a></nav>
+  <span>Role: Recruiter</span></header>
+<main>
+  <h1>Screen name</h1>
+  <p class="note">W-nnn · Requirements: FR-001, BR-002 · Roles: Recruiter</p>
+
+  <form class="box" aria-label="Example form">
+    <label class="req" for="title">Job title</label>
+    <input id="title" required maxlength="120" placeholder="e.g. Senior Accountant">
+    <p class="note">BR-002: max 120 characters (from the FRD)</p>
+    <label for="dept">Department</label>
+    <select id="dept"><option>Finance</option><option>HR</option></select>
+    <button class="primary" type="submit">Submit for approval</button><button type="button">Cancel</button>
+  </form>
+
+  <section class="box"><h2>List</h2>
+    <table><tr><th>Title</th><th>Status</th><th>Actions</th></tr>
+      <tr><td>Senior Accountant</td><td>Draft</td><td><a href="#">Edit</a></td></tr></table></section>
+
+  <section><h2>States</h2>
+    <div class="state">Loading: skeleton rows</div>
+    <div class="state">Empty: "No requisitions yet" + Create button</div>
+    <div class="state">Error: banner with retry</div></section>
+</main>
+</body>
+</html>

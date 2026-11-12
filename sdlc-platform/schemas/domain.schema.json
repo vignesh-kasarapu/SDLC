@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Domain identification",
+  "type": "object",
+  "required": ["domain", "subdomain", "confidence", "evidence", "known_domain_pack"],
+  "properties": {
+    "domain": {"type": "string", "description": "Slug, e.g. leave-management"},
+    "subdomain": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "known_domain_pack": {"type": "boolean", "description": "true if knowledge/domains/<domain>/ exists"},
+    "evidence": {"type": "array", "minItems": 1, "items": {
+      "type": "object", "required": ["source", "quote"],
+      "properties": {"source": {"type": "string", "pattern": "^C-\\d{3,}$"}, "quote": {"type": "string"}}}},
+    "alternatives": {"type": "array", "items": {"type": "object", "properties": {
+      "domain": {"type": "string"}, "confidence": {"type": "number"}, "reason": {"type": "string"}}}}
+  }
+}

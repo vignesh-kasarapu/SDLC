@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Local Claude Code settings (per user)
+.claude/settings.local.json
+
+# Safety net: client data and generated apps belong NEXT TO this folder, never inside it
+projects/
+app-development/
+
+# OS / editor
+.DS_Store
+Thumbs.db

@@ -1,0 +1,53 @@
+# Domain taxonomy used by the domain-identifier agent.
+# A domain with `pack: true` has a checklist under knowledge/domains/<slug>/.
+# Unknown domains still work: only the _generic checklist is applied and the
+# approver is warned that domain coverage was not validated by a domain pack.
+domains:
+  - slug: leave-management
+    name: Leave Management System
+    pack: true
+    parent: human-resources
+    subdomains:
+      - slug: corporate-leave
+        name: Corporate / enterprise employee leave
+      - slug: academic-leave
+        name: Academic staff / student leave
+      - slug: shift-workforce-leave
+        name: Shift-based workforce leave (retail, manufacturing, healthcare staff)
+    signals: [leave, absence, vacation, "time off", PTO, "leave balance", accrual, "sick leave", "casual leave", approval, manager, HR, holiday calendar, carry forward, encashment]
+
+  - slug: recruitment
+    name: Recruitment / Applicant Tracking System
+    pack: true
+    parent: human-resources
+    subdomains:
+      - {slug: applicant-tracking, name: In-house applicant tracking (ATS)}
+      - {slug: agency-recruitment, name: Recruitment agency / staffing}
+      - {slug: campus-hiring, name: Campus / bulk hiring}
+    signals: [recruit, hiring, candidate, applicant, requisition, job opening, job posting, interview, scorecard, offer, referral, pipeline, ATS]
+
+  - slug: hospital-management
+    name: Hospital Management System
+    pack: false
+    parent: healthcare
+    subdomains:
+      - {slug: outpatient, name: Outpatient / clinic}
+      - {slug: inpatient, name: Inpatient / ward management}
+    signals: [patient, doctor, appointment, prescription, ward, admission, discharge, laboratory, EMR, EHR]
+
+  - slug: e-commerce
+    name: E-commerce
+    pack: false
+    parent: retail
+    subdomains:
+      - {slug: b2c-store, name: B2C online store}
+      - {slug: marketplace, name: Multi-vendor marketplace}
+    signals: [cart, checkout, product catalog, order, payment, shipping, inventory, coupon]
+
+  - slug: inventory-management
+    name: Inventory Management
+    pack: false
+    parent: supply-chain
+    subdomains:
+      - {slug: warehouse, name: Warehouse inventory}
+    signals: [stock, SKU, warehouse, reorder, purchase order, supplier, GRN]

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feature / suite test report",
+  "type": "object",
+  "required": ["scope", "commands", "totals", "acceptance", "defects", "verdict"],
+  "properties": {
+    "scope": {"type": "string", "description": "Feature ID or suite name"},
+    "attempt": {"type": "integer"},
+    "commands": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["cmd", "exit_code"],
+      "properties": {"cmd": {"type": "string"}, "exit_code": {"type": "integer"}, "summary": {"type": "string"}}}},
+    "totals": {"type": "object", "required": ["passed", "failed"], "properties": {
+      "passed": {"type": "integer"}, "failed": {"type": "integer"}, "skipped": {"type": "integer"}}},
+    "acceptance": {"type": "array", "items": {"type": "object", "required": ["criterion", "status"],
+      "properties": {"criterion": {"type": "string"}, "requirement_id": {"type": "string"},
+        "status": {"enum": ["pass", "fail", "not_tested"]}, "test": {"type": "string"}}}},
+    "defects": {"type": "array", "items": {"type": "string", "pattern": "^D-\\d{3}$"}},
+    "verdict": {"enum": ["pass", "fail"], "description": "pass only if every command exited 0, failed == 0 and no acceptance criterion is fail/not_tested"}
+  }
+}

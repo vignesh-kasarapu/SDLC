@@ -1,0 +1,47 @@
+# MVC layer dependency rules (knowledge/standards/mvc-coding-standards.md §1).
+# DEFAULT for FastAPI + React. For another stack, the architect writes 02-spec/layers.yaml
+# in this format, and that file takes precedence.
+#
+# tools/layer_check.py resolves imports in Python (absolute `app.x.y` or relative) and in
+# TS/JS (relative paths) to files, finds each file's layer, and fails on any import of a
+# layer that is not in `may_import`. Imports within the same layer, and third-party or
+# stdlib imports, are always allowed. Files outside every layer (main.py, tests) are not checked.
+python_package_roots:       # module prefix -> directory (relative to app-development/<id>/)
+  app: backend/app
+layers:
+  controllers:
+    paths: [backend/app/controllers/**]
+    may_import: [services, schemas, core]
+  services:
+    paths: [backend/app/services/**]
+    may_import: [repositories, models, schemas, core]
+  repositories:
+    paths: [backend/app/repositories/**]
+    may_import: [models, core]
+  models:
+    paths: [backend/app/models/**]
+    may_import: [core]
+  schemas:
+    paths: [backend/app/schemas/**]
+    may_import: [core]
+  core:
+    paths: [backend/app/core/**]
+    may_import: []
+  fe-views:
+    paths: [frontend/src/views/**]
+    may_import: [fe-components, fe-controllers, fe-types, fe-utils]
+  fe-components:
+    paths: [frontend/src/components/**]
+    may_import: [fe-types, fe-utils]
+  fe-controllers:
+    paths: [frontend/src/controllers/**]
+    may_import: [fe-services, fe-types, fe-utils]
+  fe-services:
+    paths: [frontend/src/services/**, frontend/src/api/**]
+    may_import: [fe-types, fe-utils]
+  fe-types:
+    paths: [frontend/src/types/**]
+    may_import: []
+  fe-utils:
+    paths: [frontend/src/utils/**]
+    may_import: [fe-types]
